@@ -131,14 +131,16 @@ jobs:
         " >> release.txt
         echo "tag_status=success" >> $GITHUB_ENV
 
-    - name: 发布固件到 Releases
-      uses: softprops/action-gh-release@v2
-      if: ${{ env.tag_status == 'success' }} && !cancelled()
+    - name: Upload firmware to release
+      uses: softprops/action-gh-release@master
+      if: steps.tag.outputs.status == 'success' && !cancelled()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: OpenWrt_${{ env.PACKAGED_OUTPUTDATE }}
-        files: ${{ env.PACKAGED_OUTPUTPATH }}/*.img.xz
+        tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
-        token: ${{ env.GITHUB_TOKEN }}
+        files: ${{ env.FIRMWARE }}/*
+
 
     - name: 消息推送
       run: curl "https://api2.pushdeer.com/message/push?pushkey=${{ secrets.PUSHDEER_TOKEN }}&text=【Github Actions】OpenWrt-N1打包成功"
