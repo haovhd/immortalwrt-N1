@@ -5,9 +5,9 @@
 
 
 # Add packages
-git clone --depth=1 https://github.com/ophub/luci-app-amlogic package/amlogic
-git clone  https://github.com/linkease/luci-app-linkease package/linkease
-git clone  https://github.com/gdy666/luci-app-lucky.git package/lucky
+#git clone --depth=1 https://github.com/ophub/luci-app-amlogic package/amlogic
+#git clone  https://github.com/linkease/luci-app-linkease package/linkease
+#git clone  https://github.com/gdy666/luci-app-lucky.git package/lucky
 
 # add luci-app-mosdns
 rm -rf feeds/packages/lang/golang
@@ -22,9 +22,9 @@ git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 
 echo "
 # 插件
-CONFIG_PACKAGE_luci-app-amlogic=y
-CONFIG_PACKAGE_luci-app-linkease=y
-CONFIG_PACKAGE_luci-app-lucky=y
+CONFIG_PACKAGE_luci-app-amlogic=n
+CONFIG_PACKAGE_luci-app-linkease=n
+CONFIG_PACKAGE_luci-app-lucky=n
 " >> .config
 
 # 修改默认IP
